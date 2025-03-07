@@ -1,0 +1,91 @@
+﻿@page
+@model Aying_TICTACTOE.Pages.IndexModel
+@{
+    ViewData["Title"] = "Tic-Tac-Toe";
+}
+
+<div class="container">
+    <h1>Tic-Tac-Toe</h1>
+    <p>Current Player: <span id="current-player">@Model.CurrentPlayer</span></p>
+
+    <!-- Game Board -->
+    <div id="game-board">
+        @for (int i = 0; i < 3; i++)
+        {
+            <div class="row">
+                @for (int j = 0; j < 3; j++)
+                {
+                    <div class="cell" data-row="@i" data-col="@j">
+                        @Model.Board[i, j]
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Game Over Message -->
+    @if (Model.GameOver)
+    {
+        <div id="game-over-message">
+            <h2>Game Over!</h2>
+            <p><span id="winner-message">Player @Model.CurrentPlayer wins!</span></p>
+            <a href="/" class="btn">Play Again</a>
+        </div>
+    }
+
+    <!-- Restart Button -->
+    <div>
+        <a href="/" class="btn btn-secondary">Restart Game</a>
+    </div>
+</div>
+
+<!-- SignalR Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+<!-- JavaScript for Interactivity -->
+@section Scripts {
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/gameHub")
+            .build();
+
+        // Start SignalR connection
+        connection.start().catch(err => console.error(err));
+
+        // Handle receiving a move
+        connection.on("ReceiveMove", (row, col, player) => {
+            const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            cell.textContent = player;
+            document.getElementById("current-player").textContent = player === "X" ? "O" : "X";
+        });
+
+        // Handle game over
+        connection.on("ReceiveGameOver", (winner) => {
+            document.getElementById("game-over-message").style.display = "block";
+            document.getElementById("winner-message").textContent = `Player ${winner} wins!`;
+        });
+
+        // Handle cell clicks
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.addEventListener('click', () => {
+                const row = cell.getAttribute('data-row');
+                const col = cell.getAttribute('data-col');
+
+                fetch(`/Index?handler=Move&row=${row}&col=${col}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(response => {
+                    if (response.ok) {
+                        console.log("Move successful");
+                    } else {
+                        console.error("Move failed:", response.statusText);
+                    }
+                }).catch(error => {
+                    console.error("Fetch error:", error);
+                });
+            });
+        });
+    </script>
+}
