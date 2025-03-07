@@ -14,7 +14,7 @@ Draw: If all cells are filled and no player has three marks in a row, the game e
 
 How to Play
 Starting the Game
-Open the game in your web browser by navigating to the appropriate URL (e.g., https://localhost:5001).
+
 
 The game board will be displayed as a 3x3 grid of empty cells.
 
@@ -42,4 +42,6 @@ After a game ends (either in a win or a draw), you can restart the game by click
 
 
 disclaimer:dili mo gana akong duwa inig run sir wala ko kay baw asa ang issues pero not choice ko sir pass nalang ako 
-at lest honest ko sir hehe
+at lest honest ko sir hehe. mo pass lang ko balik ani sir unya alas 10 bahalag late na sir basta ako ra i comment ang link sa git hub sir balik 
+
+
