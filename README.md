@@ -41,7 +41,5 @@ Restarting the Game
 After a game ends (either in a win or a draw), you can restart the game by clicking the Restart button (if available) or refreshing the page.
 
 
-disclaimer:dili mo gana akong duwa inig run sir wala ko kay baw asa ang issues pero not choice ko sir pass nalang ako 
-at lest honest ko sir hehe. mo pass lang ko balik ani sir unya alas 10 bahalag late na sir basta ako ra i comment ang link sa git hub sir balik 
 
 
