@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
-using Aying_TICTACTOE.Hubs;
 
 namespace Aying_TICTACTOE.Pages
 {

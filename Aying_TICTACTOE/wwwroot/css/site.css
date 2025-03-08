@@ -8,26 +8,31 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 .container {
     text-align: center;
     background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 400px;
 }
 
 h1 {
     font-size: 2.5rem;
     color: #2c3e50;
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
 p {
     font-size: 1.2rem;
     color: #34495e;
+    margin-bottom: 20px;
 }
 
 /* Game Board */
@@ -47,16 +52,18 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     border-radius: 10px;
+    user-select: none;
 }
 
     .cell:hover {
         background-color: #2980b9;
         transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .cell:active {
@@ -72,12 +79,81 @@ p {
             background-color: #d35400; /* Darker orange on hover */
         }
 
+  
+    /* Winning Cell Styling */
+    .cell.winning-cell {
+        background-color: #2ecc71; /* Green color for winning cells */
+        animation: pulse 1s infinite;
+    }
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* Game Over Message */
 #game-over-message {
     margin-top: 20px;
     font-size: 1.5rem;
     color: #e74c3c;
     display: none; /* Hidden by default */
+    font-weight: 600;
+}
+
+.cell.winning-cell {
+    background-color: #2ecc71; /* Green color for winning cells */
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Buttons */
@@ -85,17 +161,20 @@ p {
     background-color: #2ecc71;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     margin: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
     .btn:hover {
         background-color: #27ae60;
         transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .btn:active {
@@ -110,6 +189,17 @@ p {
         background-color: #d35400;
     }
 
+/* Scoreboard */
+#scoreboard {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #34495e;
+}
+
+    #scoreboard p {
+        margin: 5px 0;
+    }
+
 /* Responsive Design */
 @media (max-width: 600px) {
     h1 {
@@ -119,11 +209,37 @@ p {
     .cell {
         width: 80px;
         height: 80px;
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     #game-board {
         grid-template-columns: repeat(3, 80px);
         grid-template-rows: repeat(3, 80px);
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .cell {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+
+    #game-board {
+        grid-template-columns: repeat(3, 70px);
+        grid-template-rows: repeat(3, 70px);
     }
 }
